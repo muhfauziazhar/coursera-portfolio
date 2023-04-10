@@ -1,25 +1,39 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Spinner from '../components/Spinner';
 
 const ContactMe = () => {
+  const randomNum = Math.ceil(Math.random() * 10);
+  console.log(randomNum > 5 ? 'Success' : 'Fail');
+
   const input = {
     name: '',
     email: '',
     message: '',
   };
+
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     message: Yup.string().required('Message is required'),
   });
+  const handleSubmit = (values, { resetForm }) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      alert(`Thank you for your message, ${values.name}! Your message: ${values.message}`);
+      setIsLoading(false);
+      resetForm({ values: '' });
+    }, 2000);
+  };
 
   const formik = useFormik({
     initialValues: input,
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      alert(`Thank you for your message, ${values.name}! Your message: ${values.message}`);
-      resetForm({ values: '' });
+      handleSubmit(values, { resetForm });
     },
   });
   return (
@@ -82,8 +96,9 @@ const ContactMe = () => {
           <div className="flex w-full">
             <button
               type="submit"
-              className="py-2 px-4  bg-cyan-800 hover:scale-110  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md  rounded-lg "
+              className="py-2 px-4 flex justify-center bg-cyan-800 hover:scale-110  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md  rounded-lg "
             >
+              {isLoading && <Spinner />}
               Send
             </button>
           </div>
