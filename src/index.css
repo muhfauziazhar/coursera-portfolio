@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-color: #4c5c54;
+  --second-color: #f3cb14;
+  --body-color: #ffedd0;
+
+  --main-font: 'Poppins', sans-serif;
+  --logo-font: 'Cinzel', serif;
+}
+
+body {
+  background-color: var(--body-color);
+  font-family: var(--main-font);
+  font-weight: 400;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border: none;
+}
+
+menu,
+ol,
+ul {
+  padding-left: 0;
+}
+
+menu:not(article menu),
+ol:not(article ol),
+ul:not(article ul) {
+  list-style: none;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+label,
+button,
+select,
+summary,
+[type='radio'],
+[type='submit'],
+[type='checkbox'] {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
